@@ -1,14 +1,18 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
+// Hash links use a leading "/" so they still resolve correctly when clicked
+// from /services or /services/[slug] — Next.js will navigate home first,
+// then scroll to the section. "Services" points at the real listing page.
 const LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "PPF", href: "#collection" },
-  { label: "About", href: "#why-luxen" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "PPF", href: "/#collection" },
+  { label: "About", href: "/#why-luxen" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -20,9 +24,7 @@ export default function Navbar() {
 
     onScroll();
 
-    window.addEventListener("scroll", onScroll, {
-      passive: true,
-    });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -34,31 +36,32 @@ export default function Navbar() {
           scrolled ? "shadow-[0_8px_30px_rgba(0,0,0,0.45)]" : ""
         }`}
       >
-        {/* Logo */}
-        <a
-          href="#home"
-          className="shrink-0 text-lg font-semibold tracking-wide"
-        >
-          LU<span className="text-gold-400">X</span>EN
-        </a>
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/images/logo.png"
+            alt="Luxen"
+            width={110}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
+        </Link>
 
-        {/* Desktop Navigation */}
         <ul className="hidden items-center gap-7 md:flex">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className="group relative text-sm text-white/80 transition-colors duration-200 hover:text-white"
               >
                 {link.label}
 
                 <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-400 transition-all duration-300 ease-luxe group-hover:w-full" />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
         <button
           type="button"
           aria-label="Toggle menu"
@@ -86,7 +89,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Navigation */}
       <div
         className={`mt-2 overflow-hidden rounded-2xl border border-white/10 bg-black/85 backdrop-blur-xl transition-all duration-300 ease-luxe md:hidden ${
           open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
@@ -95,13 +97,13 @@ export default function Navbar() {
         <ul className="flex flex-col divide-y divide-white/5 px-5 py-2">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="block py-3 text-sm text-white/80 transition-colors hover:text-gold-400"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

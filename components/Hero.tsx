@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const HERO_IMAGES: string[] = [
   "/images/hero/Homepage hero.png",
-  // "/images/hero/hero-2.png",
+  "/images/hero/Homepage hero 2.png",
   // "/images/hero/hero-3.png",
 ];
 
@@ -27,7 +27,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[92vh] w-full items-center overflow-hidden bg-ink"
+      className="relative flex min-h-[86vh] w-full items-center overflow-hidden bg-ink"
     >
       <div className="absolute inset-0">
         {HERO_IMAGES.map((src, i) => (
@@ -52,12 +52,11 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-transparent to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-24 sm:px-10">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-20 sm:px-10">
         <div className="max-w-xl animate-fadeSlide sm:ml-auto sm:text-right">
           <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-            The{" "}
-            <span className="text-gold-400">Ultimate Shield</span> For Your
-            Masterpiece
+            The <span className="text-gold-400">Ultimate Shield</span> For
+            Your Masterpiece
           </h1>
 
           <p className="mt-5 text-sm leading-relaxed text-white/60 sm:text-base">
@@ -75,7 +74,7 @@ export default function Hero() {
 
             <a
               href="#services"
-              className="rounded-full bg-gold-500 px-6 py-3 text-sm font-medium text-ink transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_10px_30px_rgba(211,169,74,0.35)]"
+              className="btn-shine rounded-full bg-gold-500 px-6 py-3 text-sm font-medium text-ink transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_10px_30px_rgba(211,169,74,0.35)]"
             >
               Explore Product
             </a>

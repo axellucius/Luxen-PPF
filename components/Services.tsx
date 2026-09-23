@@ -1,40 +1,43 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const SERVICES = [
   {
     title: "Paint Protection\nFilm",
     image: "/images/PPF.png",
-    href: "#ppf",
+    href: "/services/ppf",
   },
   {
     title: "Window Car\nFilm",
     image: "/images/Window Car Film.png",
-    href: "#window-film",
+    href: "/services/window-film",
   },
   {
     title: "Wrapping\nPET",
     image: "/images/Wrapping PET.png",
-    href: "#wrapping",
+    href: "/services/wrapping-pet",
   },
   {
     title: "Paint Protection\nFilm Color",
     image: "/images/PPF Color.png",
-    href: "#ppf-color",
+    href: "/services/ppf-color",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="bg-ink py-24 sm:py-32">
+    <section id="services" className="bg-ink py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
-        <p className="eyebrow text-center">OUR SERVICES</p>
+        <div className="divider-gold mb-12" />
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <p className="eyebrow text-center text-sm">Our Services</p>
+
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {SERVICES.map((s) => (
-            <a
+            <Link
               key={s.title}
               href={s.href}
-              className="group relative isolate flex h-72 flex-col justify-end overflow-hidden rounded-2xl border border-line p-7"
+              className="group relative isolate flex h-60 flex-col justify-end overflow-hidden rounded-2xl border border-line p-6 transition-all duration-300 ease-luxe hover:border-gold-500/40"
             >
               <Image
                 src={s.image}
@@ -51,9 +54,8 @@ export default function Services() {
                   {s.title}
                 </h3>
 
-                <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold-500 px-5 py-2.5 text-sm font-medium text-ink transition-all duration-300 ease-luxe group-hover:gap-3 group-hover:bg-gold-400">
+                <span className="mt-3.5 inline-flex items-center gap-2 rounded-full bg-gold-500 px-5 py-2.5 text-sm font-medium text-ink transition-all duration-300 ease-luxe group-hover:gap-3 group-hover:bg-gold-400">
                   Detail
-
                   <svg
                     width="14"
                     height="14"
@@ -71,8 +73,26 @@ export default function Services() {
                   </svg>
                 </span>
               </div>
-            </a>
+            </Link>
           ))}
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-white transition-all duration-300 ease-luxe hover:border-white hover:bg-white hover:text-ink"
+          >
+            Lihat Semua Layanan
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

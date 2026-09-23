@@ -1,11 +1,23 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const COLUMNS = [
   {
     title: "Company",
-    links: ["Keunggulan", "About", "Services", "Blog"],
+    links: [
+      { label: "Keunggulan", href: "/#why-luxen" },
+      { label: "Services", href: "/services" },
+      { label: "Contact", href: "/#contact" },
+    ],
   },
   {
     title: "Products",
-    links: ["Deluxe", "Premium", "Platinum", "Titanium"],
+    links: [
+      { label: "6.5 Mil", href: "/#collection" },
+      { label: "7.5 Mil", href: "/#collection" },
+      { label: "8.5 Mil", href: "/#collection" },
+      { label: "10 Mil", href: "/#collection" },
+    ],
   },
 ];
 
@@ -40,16 +52,22 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-ink pt-16">
+    <footer className="border-t border-line bg-ink pt-12">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
-        <div className="grid grid-cols-1 gap-12 pb-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid grid-cols-1 gap-10 pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <p className="text-lg font-semibold tracking-wide">
-              LU<span className="text-gold-400">X</span>EN
-            </p>
+            <Link href="/">
+              <Image
+                src="/images/logo.png"
+                alt="LUXEN"
+                width={130}
+                height={38}
+                className="h-9 w-auto"
+              />
+            </Link>
 
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/50">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/50">
               The Ultimate Shield For Your Masterpiece. Safeguarding your
               luxury vehicle with precision craftsmanship.
             </p>
@@ -64,13 +82,13 @@ export default function Footer() {
 
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
                       className="text-sm text-white/50 transition-colors duration-200 hover:text-gold-400"
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -82,21 +100,15 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white">Connect</h4>
 
             <div className="mt-4 flex gap-3">
-              {SOCIALS.map((s) => (
+              {SOCIALS.map((social) => (
                 <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-white/60 transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:border-gold-500/50 hover:text-gold-400"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    {SOCIAL_ICONS[s.label]}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    {SOCIAL_ICONS[social.label]}
                   </svg>
                 </a>
               ))}
@@ -105,7 +117,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-line py-6 text-center text-xs text-white/40">
+        <div className="border-t border-line py-5 text-center text-xs text-white/40">
           ©2026 LUXEN Paint Protection Film. All Rights Reserved.
         </div>
       </div>
