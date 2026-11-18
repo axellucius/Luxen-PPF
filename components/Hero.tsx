@@ -1,103 +1,74 @@
-"use client";
-
-import Image from "next/image";
-import { useEffect, useState } from "react";
-
-const HERO_IMAGES: string[] = [
-  "/images/hero/Homepage hero.png",
-  "/images/hero/Homepage hero 2.png",
-  // "/images/hero/hero-3.png",
-];
-
-const SLIDE_DURATION = 6000;
+import ImageOrPlaceholder from "@/components/ImageOrPlaceholder";
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
+import { IMAGES } from "@/lib/images";
+import { waLink } from "@/lib/site";
 
 export default function Hero() {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (HERO_IMAGES.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setActive((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, SLIDE_DURATION);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section
       id="home"
-      className="relative flex min-h-[86vh] w-full items-center overflow-hidden bg-ink"
+      className="relative flex min-h-[100svh] items-end overflow-hidden bg-ink pb-24 pt-32 sm:items-center sm:pb-0"
     >
       <div className="absolute inset-0">
-        {HERO_IMAGES.map((src, i) => (
-          <div
-            key={src}
-            className={`absolute inset-0 transition-opacity duration-[1600ms] ease-luxe ${
-              i === active ? "opacity-60" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={src}
-              alt=""
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </div>
-        ))}
-
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 animate-slowZoom">
+          <ImageOrPlaceholder
+            src={IMAGES.hero}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-55"
+            label="Foto hero"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/20 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-20 sm:px-10">
-        <div className="max-w-xl animate-fadeSlide sm:ml-auto sm:text-right">
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-            The <span className="text-gold-400">Ultimate Shield</span> For
-            Your Masterpiece
+      <Container className="relative z-10">
+        <div className="max-w-4xl">
+          <p
+            className="eyebrow animate-fadeUp"
+            style={{ animationDelay: "150ms" }}
+          >
+            Paint Protection Film · Window Film · Wrapping
+          </p>
+
+          <h1
+            className="animate-fadeUp mt-6 font-display text-5xl font-light leading-[1] tracking-tight text-silver-50 sm:text-7xl lg:text-8xl"
+            style={{ animationDelay: "300ms" }}
+          >
+            The <span className="chrome-text font-normal">Ultimate Shield</span>{" "}
+            For Your Masterpiece
           </h1>
 
-          <p className="mt-5 text-sm leading-relaxed text-white/60 sm:text-base">
+          <p
+            className="animate-fadeUp mt-7 max-w-lg text-sm leading-relaxed text-white/70 sm:text-base"
+            style={{ animationDelay: "500ms" }}
+          >
             Perlindungan tanpa kompromi untuk mahakarya otomotif Anda. Standar
             kualitas global yang dipadukan dengan presisi tingkat tinggi.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4 sm:justify-end">
-            <a
-              href="#contact"
-              className="rounded-full border border-white/25 px-6 py-3 text-sm font-medium text-white transition-all duration-300 ease-luxe hover:border-white hover:bg-white hover:text-ink"
-            >
-              Whatsapp kami
-            </a>
-
-            <a
-              href="#services"
-              className="btn-shine rounded-full bg-gold-500 px-6 py-3 text-sm font-medium text-ink transition-all duration-300 ease-luxe hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_10px_30px_rgba(211,169,74,0.35)]"
-            >
-              Explore Product
-            </a>
+          <div
+            className="animate-fadeUp mt-10 flex flex-wrap gap-4"
+            style={{ animationDelay: "700ms" }}
+          >
+            <Button href="/services">Jelajahi Layanan</Button>
+            <Button href={waLink()} external variant="outline">
+              WhatsApp Kami
+            </Button>
           </div>
         </div>
-      </div>
+      </Container>
 
-      {HERO_IMAGES.length > 1 && (
-        <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-          {HERO_IMAGES.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Slide ${i + 1}`}
-              onClick={() => setActive(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === active
-                  ? "w-6 bg-gold-400"
-                  : "w-1.5 bg-white/30 hover:bg-white/60"
-              }`}
-            />
-          ))}
-        </div>
-      )}
+      <div className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 sm:flex">
+        <span className="eyebrow">Scroll</span>
+        <span className="relative h-12 w-px overflow-hidden bg-white/15">
+          <span className="scroll-line absolute inset-0 bg-silver-200" />
+        </span>
+      </div>
     </section>
   );
 }

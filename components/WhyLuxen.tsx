@@ -1,74 +1,56 @@
+import Container from "@/components/ui/Container";
+import Reveal from "@/components/ui/Reveal";
+
+// TODO: owner must confirm these product claims.
 const FEATURES = [
   {
-    title: "Pure Aliphatic TPU Technology",
-    desc: "Material TPU murni kelas dunia yang memberikan proteksi maksimal dari sinar UV serta jaminan bebas menguning dalam jangka panjang.",
-    icon: (
-      <path
-        d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6l7-3z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    ),
+    title: "Pure Aliphatic TPU",
+    desc: "Material TPU murni kelas dunia dengan proteksi maksimal dari sinar UV serta jaminan bebas menguning dalam jangka panjang.",
   },
   {
-    title: "7.5mil",
+    title: "Ketebalan 7.5 Mil",
     desc: "Ketebalan optimal untuk meredam benturan kerikil dan goresan halus, dilengkapi kemampuan pulih otomatis.",
-    icon: (
-      <path
-        d="M12 3l8 4-8 4-8-4 8-4zM4 11l8 4 8-4M4 15l8 4 8-4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    ),
   },
   {
-    title: "Self-Healing Property",
-    desc: "Teknologi pemulihan otomatis yang membuat goresan-goresan halus pada permukaan film hilang seketika secara mandiri saat terkena sinar matahari.",
-    icon: (
-      <path
-        d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    ),
+    title: "Self-Healing",
+    desc: "Goresan halus pada permukaan film hilang dengan sendirinya saat terkena sinar matahari.",
   },
 ];
 
 export default function WhyLuxen() {
   return (
-    <section id="why-luxen" className="relative bg-ink py-20 sm:py-24">
-      <div className="mx-auto max-w-6xl px-6 sm:px-10">
-        <div className="divider-gold mb-14" />
+    <section id="why-luxen" className="bg-ink py-24 sm:py-32">
+      <Container>
+        <div className="grid gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
+          <Reveal>
+            <p className="eyebrow">Keunggulan</p>
+            <h2 className="section-heading mt-5 max-w-xl">
+              Cat mobil Anda layak mendapat{" "}
+              <span className="chrome-text italic">perisai</span> terbaik.
+            </h2>
+          </Reveal>
 
-        <div className="text-center">
-          <p className="eyebrow">Keunggulan</p>
-          <h2 className="section-heading mt-3">Kenapa Luxen?</h2>
+          <ol className="flex flex-col">
+            {FEATURES.map((f, i) => (
+              <Reveal key={f.title} delay={i * 120}>
+                <li className="grid grid-cols-[auto_1fr] gap-6 border-t border-line py-8 last:border-b">
+                  <span className="font-display text-2xl text-silver-500">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-2xl text-silver-50">
+                      {f.title}
+                    </h3>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-white/70">
+                      {f.desc}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
         </div>
-
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f) => (
-            <div
-              key={f.title}
-              className="group rounded-2xl border border-line bg-surface p-8 text-left transition-all duration-300 ease-luxe hover:-translate-y-1.5 hover:border-gold-500/40 hover:bg-surface-2 hover:shadow-[0_20px_45px_rgba(0,0,0,0.45)]"
-            >
-              <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-gold-500/10 text-gold-400 transition-colors duration-300 group-hover:bg-gold-500/20">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  {f.icon}
-                </svg>
-              </div>
-
-              <h3 className="text-lg font-semibold text-white">{f.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">
-                {f.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      </Container>
     </section>
   );
 }

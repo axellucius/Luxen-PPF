@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -6,6 +5,10 @@ import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
 import BookCta from "@/components/BookCta";
 import Footer from "@/components/Footer";
+import ImageOrPlaceholder from "@/components/ImageOrPlaceholder";
+import Container from "@/components/ui/Container";
+import Reveal from "@/components/ui/Reveal";
+import { IMAGES } from "@/lib/images";
 import { SERVICES } from "@/lib/services-data";
 
 export const metadata: Metadata = {
@@ -21,76 +24,53 @@ export default function ServicesPage() {
 
       <main>
         <PageHero
-          image="/images/services/services-hero.png"
+          image={IMAGES.servicesHero}
+          eyebrow="Layanan Kami"
           title="Our Services"
           subtitle="Solusi perlindungan dan estetika premium untuk kemewahan kendaraan Anda."
           breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
         />
 
-        <section className="bg-ink py-20 sm:py-24">
-          <div className="mx-auto max-w-6xl px-6 sm:px-10">
-            <div className="divider-gold mb-14" />
+        <section className="bg-ink py-24 sm:py-32">
+          <Container>
+            <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2">
+              {SERVICES.map((s, i) => (
+                <Reveal key={s.slug} delay={(i % 2) * 120}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className={`group block ${i % 2 === 1 ? "sm:mt-16" : ""}`}
+                  >
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line">
+                      <ImageOrPlaceholder
+                        src={s.cardImage}
+                        alt={s.title}
+                        fill
+                        sizes="(min-width: 640px) 50vw, 100vw"
+                        className="object-cover object-center transition-transform duration-[1200ms] ease-luxe group-hover:scale-105"
+                        label={s.shortTitle}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    </div>
 
-            <div className="text-center">
-              <p className="eyebrow">Layanan Kami</p>
-              <h2 className="section-heading mt-3">Our Services</h2>
-              <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/55">
-                Jaga kilau dan proteksi mobil mewah Anda dengan standar
-                tertinggi. Pilih layanan yang sesuai dengan kebutuhan
-                kendaraan Anda.
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {SERVICES.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 ease-luxe hover:-translate-y-1.5 hover:border-gold-500/40 hover:shadow-[0_20px_45px_rgba(0,0,0,0.45)]"
-                >
-                  <div className="relative h-44 w-full overflow-hidden">
-                    <Image
-                      src={service.cardImage}
-                      alt={service.title}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover object-center transition-transform duration-700 ease-luxe group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                  </div>
-
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-base font-semibold text-white">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-2 flex-1 text-xs leading-relaxed text-white/50">
-                      {service.tagline}
-                    </p>
-
-                    <span className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-gold-500 px-4 py-2 text-xs font-medium text-ink transition-all duration-300 ease-luxe group-hover:gap-2.5 group-hover:bg-gold-400">
-                      Detail
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M5 12h14M13 6l6 6-6 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
+                    <div className="mt-6 flex items-start gap-5">
+                      <span className="font-display text-xl text-silver-500">
+                        0{i + 1}
+                      </span>
+                      <div>
+                        <h2 className="font-display text-3xl text-silver-50 transition-colors group-hover:text-white">
+                          {s.title}
+                        </h2>
+                        <p className="mt-2 text-sm text-white/60">{s.tagline}</p>
+                        <span className="mt-4 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-silver-300 transition-all duration-500 ease-luxe group-hover:gap-4 group-hover:text-white">
+                          Lihat Detail →
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </Reveal>
               ))}
             </div>
-          </div>
+          </Container>
         </section>
 
         <BookCta />
