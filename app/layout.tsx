@@ -53,7 +53,7 @@ export default async function RootLayout({
       <body className="bg-ink font-sans text-white antialiased">
         <I18nProvider lang={lang} messages={messages}>
           {children}
-          <FloatingWhatsApp />
+          <FloatingWhatsApp message={t("wa.default")} label={t("wa.floating")} />
         </I18nProvider>
         <script
           type="application/ld+json"

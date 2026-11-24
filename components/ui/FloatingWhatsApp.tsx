@@ -1,12 +1,12 @@
 import { waLink } from "@/lib/site";
 
-export default function FloatingWhatsApp() {
+export default function FloatingWhatsApp({ message, label }: { message: string; label: string }) {
   return (
     <a
-      href={waLink()}
+      href={waLink(message)}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat WhatsApp LUXEN"
+      aria-label={label}
       className="btn-chrome fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-[0_10px_35px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-luxe hover:scale-105 sm:bottom-8 sm:right-8"
     >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
