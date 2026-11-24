@@ -28,7 +28,7 @@ export default function ImageOrPlaceholder({
   sizes,
   priority,
   className,
-  label = "Foto belum ditambahkan",
+  label = "Photo coming soon",
 }: ImageOrPlaceholderProps) {
   const [failed, setFailed] = useState(false);
 

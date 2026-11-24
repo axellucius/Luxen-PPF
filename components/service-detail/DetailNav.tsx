@@ -1,34 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { waLink } from "@/lib/site";
 
 type Section = { id: string; label: string };
 
 export default function DetailNav({
   sections,
-  serviceTitle,
+  ctaHref,
+  ctaLabel,
 }: {
   sections: Section[];
-  serviceTitle: string;
+  ctaHref: string;
+  ctaLabel: string;
 }) {
   const [active, setActive] = useState(sections[0]?.id ?? "");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
     );
-
     sections.forEach((s) => {
       const el = document.getElementById(s.id);
       if (el) observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, [sections]);
 
@@ -41,11 +36,7 @@ export default function DetailNav({
               <a
                 href={`#${s.id}`}
                 aria-current={active === s.id ? "true" : undefined}
-                className={`flex min-h-11 items-center text-xs uppercase tracking-[0.2em] transition-colors duration-300 ${
-                  active === s.id
-                    ? "text-silver-50"
-                    : "text-white/50 hover:text-white"
-                }`}
+                className={`flex min-h-11 items-center text-xs uppercase tracking-[0.2em] transition-colors duration-300 ${active === s.id ? "text-silver-50" : "text-white/50 hover:text-white"}`}
               >
                 {s.label}
               </a>
@@ -53,13 +44,8 @@ export default function DetailNav({
           ))}
         </ul>
 
-        <a
-          href={waLink(`Halo LUXEN, saya ingin konsultasi ${serviceTitle}.`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-chrome hidden min-h-10 shrink-0 items-center rounded-full px-5 text-xs font-semibold lg:inline-flex"
-        >
-          Konsultasi
+        <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn-chrome hidden min-h-10 shrink-0 items-center rounded-full px-5 text-xs font-semibold lg:inline-flex">
+          {ctaLabel}
         </a>
       </div>
     </div>

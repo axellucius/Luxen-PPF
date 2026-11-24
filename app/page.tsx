@@ -4,6 +4,7 @@ import Marquee from "@/components/Marquee";
 import WhyLuxen from "@/components/WhyLuxen";
 import Services from "@/components/Services";
 import CollectionTiers from "@/components/CollectionTiers";
+import Showcase from "@/components/Showcase";
 import Results from "@/components/Results";
 import HomeService from "@/components/HomeService";
 import FAQ from "@/components/FAQ";
@@ -20,6 +21,7 @@ export default function Home() {
         <WhyLuxen />
         <Services />
         <CollectionTiers />
+        <Showcase />
         <Results />
         <HomeService />
         <FAQ />
